@@ -4,6 +4,16 @@ function hideProduct(productId) {
         url: 'CProducts.php',
         data: {id: productId, is_hidden:1}
     });
-    var p=this.parentNode.parentNode;
-         p.parentNode.removeChild(p);
-}
+    
+    deleteRow(productId);
+};
+
+function deleteRow(productId) {
+    element = "product-" +productId;
+    el = document.getElementById(element);
+    if (el) {
+        el.remove();
+    } else {
+        console.error(`Элемент с id product-${productId} не найден.`);
+    }
+};
