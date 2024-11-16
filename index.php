@@ -31,7 +31,11 @@
                         <td>{$product['PRODUCT_NAME']}</td>
                         <td>{$product['PRODUCT_PRICE']}</td>
                         <td>{$product['PRODUCT_ARTICLE']}</td>
-                        <td>{$product['PRODUCT_QUANTITY']}</td>
+                        <td>
+                        <button class='decrease' data-id={$product['PRODUCT_ID']}>-</button>
+                        <span id='quantity-{$product['PRODUCT_ID']}'>{$product['PRODUCT_QUANTITY']}</span>
+                        <button class='increase' data-id={$product['PRODUCT_ID']}>+</button>
+                        </td>
                         <td>{$product['DATE_CREATE']}</td>
                         <td><button onclick='hideProduct({$product['PRODUCT_ID']})'>Скрыть</button></td>
                     </tr>";

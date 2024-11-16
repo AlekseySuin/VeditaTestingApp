@@ -1,8 +1,16 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'];
-    $updateProduct = new CProducts('localhost', 'root', '', 'Products');
-    $updateProduct->hideProduct($id);
+    if($_POST['is_hidden']){
+        $id = $_POST['id'];
+        $updateProduct = new CProducts('localhost', 'root', '', 'Products');
+        $updateProduct->hideProduct($id);
+    }
+    else{
+        $id = $_POST['product_id'];
+        $quantity = $_POST['quantity'];
+        $updateQuantitty = new CProducts('localhost','root','','Products');
+        $updateQuantitty->updateQuanity($id,$quantity);
+    }
 }
 
 class CProducts {
@@ -23,6 +31,11 @@ class CProducts {
 
     public function hideProduct($productId){
         $query = "UPDATE Products SET IS_HIDDEN = 1 WHERE PRODUCT_ID = $productId";
+        $result = mysqli_query($this->conn,$query);
+    }
+
+    public function updateQuanity($productId, $quantity){
+        $query = "UPDATE Products SET PRODUCT_QUANTITY = $quantity WHERE PRODUCT_ID = $productId";
         $result = mysqli_query($this->conn,$query);
     }
 };

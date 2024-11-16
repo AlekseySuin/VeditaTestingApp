@@ -17,3 +17,21 @@ function deleteRow(productId) {
         console.error(`Элемент с id product-${productId} не найден.`);
     }
 };
+
+$('.increase').click(function () {
+    var productId = $(this).data('id');
+    var quantitySpan = $('#quantity-' + productId);
+    var newQuantity = parseInt(quantitySpan.text()) + 1;
+    quantitySpan.text(newQuantity);
+
+    $.post('CProducts.php', {product_id: productId, quantity: newQuantity});
+});
+
+$('.decrease').click(function () {
+    var productId = $(this).data('id');
+    var quantitySpan = $('#quantity-' + productId);
+    var newQuantity = Math.max(0, parseInt(quantitySpan.text()) - 1);
+    quantitySpan.text(newQuantity);
+
+    $.post('CProducts.php', {product_id: productId, quantity: newQuantity});
+});
